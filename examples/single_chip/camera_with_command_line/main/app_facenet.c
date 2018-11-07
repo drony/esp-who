@@ -38,9 +38,10 @@ void task_process (void *arg)
 
         if (net_boxes)
         {
-            //draw_rectangle(img_buffer, net_boxes, gl_input_image_width);
+            // draw_rectangle(img_buffer, net_boxes, gl_input_image_width);
             frame_num++;
-            ESP_LOGI(TAG, "DETECTED: %d\n", frame_num);
+                // ESP_LOGI(TAG, "DETECTED: %d\n", frame_num);
+            ESP_LOGI(TAG, "Human Face DETECTED!!");
             free(net_boxes->box);
             free(net_boxes);
         }
@@ -55,4 +56,3 @@ void app_facenet_main ()
 {
     xTaskCreatePinnedToCore(task_process, "process", 4*1024, NULL, 5, NULL, 1);
 }
-

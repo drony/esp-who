@@ -28,7 +28,7 @@ void app_camera_init()
     config.pin_href = HREF_GPIO_NUM;
     config.pin_sscb_sda = SIOD_GPIO_NUM;
     config.pin_sscb_scl = SIOC_GPIO_NUM;
-    config.pin_reset = -1;//RESET_GPIO_NUM;
+    config.pin_reset = RESET_GPIO_NUM;//-1;
     config.xclk_freq_hz = XCLK_FREQ;
 
     gl_input_image_width = resolution[CAMERA_FRAME_SIZE][0];
@@ -60,7 +60,8 @@ void task_input (void *arg)
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
         int64_t start_time = esp_timer_get_time();
         camera_fb_t *fb = camera_get_fb();
-        ESP_LOGI(TAG, "Get one frame in %lld ms.", (esp_timer_get_time() - start_time)/1000);
+        // ESP_LOGI(TAG, "Get one frame in %lld ms.", (esp_timer_get_time() - start_time)/1000);
+        ESP_LOGI(TAG, ".......");
         xQueueSend(gpst_input_queue, &fb->buf, portMAX_DELAY);
         camera_return_fb(fb);
     } while (1);
@@ -71,6 +72,6 @@ void app_camera_main ()
     app_camera_init();
 
     gpst_input_queue = xQueueCreate(1, sizeof(void *));
-    
+
     xTaskCreatePinnedToCore(task_input, "input", 4*1024, NULL, 5, &gpst_input_task, 0);
 }
