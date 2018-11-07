@@ -47,6 +47,7 @@ In particular, if you have a **ESP-WROVER-KIT**, camera connector is already bro
 
 ![esp_wrover_kit_with_ov2640](../../../img/esp_wrover_kit_with_ov2640.png)
 
+![m5camera](../../../img/m5camera.jpg)
 
 ## Results
 
